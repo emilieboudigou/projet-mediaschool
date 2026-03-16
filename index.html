@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GloVia USA — Analyse Client</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --blue: #1B4F8A;
+    --blue-mid: #2E7DD1;
+    --blue-light: #C8DFF5;
+    --teal: #0F8A6E;
+    --teal-light: #D0F0E8;
+    --coral: #C94B2E;
+    --coral-light: #FAE4DF;
+    --purple: #5B3FA8;
+    --purple-light: #EAE4F8;
+    --amber: #B86A0A;
+    --amber-light: #FDF0D8;
+    --green: #2A7A3B;
+    --green-light: #D8F0DC;
+    --gray: #F4F2EE;
+    --text: #1A1A2E;
+    --text-muted: #5A5A72;
+    --white: #FFFFFF;
+    --border: #E2DDD6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F7F5F2;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: var(--blue-mid);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 20%;
+    width: 200px; height: 200px;
+    background: var(--teal);
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+  .header-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--blue-mid); }
+  header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    max-width: 600px;
+  }
+
+  /* NAV */
+  nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 16px 20px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover, nav a.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 36px;
+    line-height: 1.2;
+  }
+
+  /* ─── PARTIE 1 : PROFIL CLIENT ─── */
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .profil-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .profil-card-header {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .profil-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .profil-card-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .profil-card-body { padding: 0 24px 24px; }
+
+  /* TÂCHES — 4 sous-catégories */
+  .taches-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .tache-sub {
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .tache-sub-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tache-sub ul { list-style: none; }
+  .tache-sub ul li {
+    font-size: 12px;
+    padding: 3px 0;
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .tache-sub ul li::before {
+    content: '→';
+    position: absolute; left: 0;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* DOULEURS — avec intensité */
+  .pain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .pain-item:last-child { border-bottom: none; }
+  .pain-dots {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pain-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .pain-dot.active { background: var(--coral); }
+  .pain-dot.inactive { background: var(--border); }
+  .pain-label { font-size: 12px; line-height: 1.4; }
+  .pain-type {
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* GAINS — par niveau */
+  .gain-level {
+    margin-bottom: 14px;
+  }
+  .gain-level-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gain-level-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .gain-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .gain-chip {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  /* INSIGHT */
+  .insight-bar {
+    background: var(--navy);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 32px;
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .insight-item {}
+  .insight-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 6px;
+  }
+  .insight-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ─── PARTIE 2 : VALUE PROPOSITION ─── */
+  .vp-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+  }
+  .vp-square {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+  }
+  .vp-square-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-light);
+  }
+  .vp-three {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .vp-block {
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .vp-block-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .vp-block ul { list-style: none; }
+  .vp-block ul li {
+    font-size: 12px;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .vp-block ul li::before {
+    content: '✓';
+    position: absolute; left: 0;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .vp-arrow {
+    width: 60px;
+    text-align: center;
+    font-size: 28px;
+    color: var(--blue-mid);
+  }
+
+  /* Cercle profil droite */
+  .vp-circle {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+  }
+  .vp-circle-center {
+    width: 80px; height: 80px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.3;
+    z-index: 2;
+    position: relative;
+  }
+  .vp-segment {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .vp-seg-top { top: 16px; left: 50%; transform: translateX(-50%); width: 160px; }
+  .vp-seg-right { right: 8px; top: 50%; transform: translateY(-50%); width: 130px; }
+  .vp-seg-left { left: 8px; top: 50%; transform: translateY(-50%); width: 130px; }
+
+  .vp-seg-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .vp-seg-items { font-size: 11px; line-height: 1.6; }
+  /* Dividers du cercle */
+  .vp-circle-line {
+    position: absolute;
+    background: var(--border);
+    z-index: 1;
+  }
+  .vp-circle-line-h {
+    width: 80%; height: 1px;
+    top: 50%; left: 10%;
+  }
+  .vp-circle-line-v {
+    height: 80%; width: 1px;
+    left: 50%; top: 10%;
+  }
+
+  /* ─── PARTIE 3 : LEAN CANVAS ─── */
+  .lc-wrapper {
+    display: grid;
+    gap: 3px;
+  }
+  .lc-row {
+    display: grid;
+    gap: 3px;
+  }
+  .lc-row-top { grid-template-columns: 1.1fr 1fr 1.3fr 1fr 1.1fr; }
+  .lc-row-bottom { grid-template-columns: 1fr 1fr; }
+
+  .lc-cell {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    min-height: 0;
+  }
+  .lc-cell-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lc-items { list-style: none; }
+  .lc-items li {
+    font-size: 12px;
+    padding: 5px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+    border-bottom: 1px solid #F0EDE8;
+    color: var(--text);
+  }
+  .lc-items li:last-child { border-bottom: none; }
+  .lc-items li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    font-size: 9px;
+    top: 6px;
+    opacity: 0.5;
+  }
+
+  /* Colors per block */
+  .lc-probleme .lc-cell-title { color: var(--coral); border-color: var(--coral-light); }
+  .lc-probleme { border-top: 3px solid var(--coral); }
+
+  .lc-solution .lc-cell-title { color: var(--teal); border-color: var(--teal-light); }
+  .lc-solution { border-top: 3px solid var(--teal); }
+
+  .lc-valeur .lc-cell-title { color: var(--blue); border-color: var(--blue-light); }
+  .lc-valeur { border-top: 3px solid var(--blue); background: #F0F6FD; }
+
+  .lc-avantage .lc-cell-title { color: var(--purple); border-color: var(--purple-light); }
+  .lc-avantage { border-top: 3px solid var(--purple); }
+
+  .lc-segments .lc-cell-title { color: var(--amber); border-color: var(--amber-light); }
+  .lc-segments { border-top: 3px solid var(--amber); }
+
+  .lc-indicateurs .lc-cell-title { color: var(--teal); border-color: var(--teal-light); }
+  .lc-indicateurs { border-top: 3px solid var(--teal); }
+
+  .lc-canaux .lc-cell-title { color: var(--purple); border-color: var(--purple-light); }
+  .lc-canaux { border-top: 3px solid var(--purple); }
+
+  .lc-couts .lc-cell-title { color: var(--text-muted); border-color: var(--border); }
+  .lc-couts { border-top: 3px solid #9a9a9a; }
+
+  .lc-revenus .lc-cell-title { color: var(--green); border-color: var(--green-light); }
+  .lc-revenus { border-top: 3px solid var(--green); }
+
+  /* VALEUR spécial */
+  .lc-valeur-content {
+    text-align: center;
+    padding: 8px 0;
+  }
+  .lc-valeur-tagline {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .lc-valeur-sub {
+    font-size: 11px;
+    color: var(--blue);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  .lc-valeur-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+  .lc-valeur-pill {
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* DIVIDER SECTIONS */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0 40px;
+  }
+
+  .section-bg-alt { background: #FAFAF8; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .profil-grid { grid-template-columns: 1fr; }
+    .lc-row-top { grid-template-columns: 1fr 1fr; }
+    .vp-wrapper { grid-template-columns: 1fr; }
+    .vp-arrow { transform: rotate(90deg); margin: 12px auto; }
+    .insight-bar { grid-template-columns: 1fr; }
+    section { padding: 40px 20px; }
+    nav { padding: 0 20px; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Parcours Création d'Entreprise — ECS MediaSchool</div>
+  <h1>GloVia <span>USA</span><br>Analyse Client Complète</h1>
+  <p>Profil client · Proposition de valeur · Lean Canvas — La plateforme d'accompagnement vers l'expérience professionnelle aux États-Unis</p>
+</header>
+
+<nav>
+  <a href="#profil" class="active">① Profil client</a>
+  <a href="#valeur">② Value Proposition</a>
+  <a href="#canvas">③ Lean Canvas</a>
+</nav>
+
+<!-- ════════════════════════════════════
+     PARTIE 1 — PROFIL CLIENT
+════════════════════════════════════ -->
+<section id="profil">
+  <div class="section-title">Partie 1</div>
+  <div class="section-heading">Le Profil Client</div>
+
+  <div class="profil-grid">
+
+    <!-- TÂCHES -->
+    <div class="profil-card">
+      <div class="profil-card-header" style="background:#EEF5FF; border-bottom:1px solid var(--border)">
+        <div class="profil-card-icon" style="background:var(--blue-light); color:var(--blue)">📋</div>
+        <div>
+          <h3 style="color:var(--blue)">Tâches à réaliser</h3>
+          <div style="font-size:11px;color:var(--text-muted)">Customer Jobs</div>
+        </div>
+      </div>
+      <div class="profil-card-body" style="padding-top:18px">
+        <div class="taches-grid">
+          <div class="tache-sub" style="background:#EEF5FF">
+            <div class="tache-sub-label" style="color:var(--blue)">Fonctionnelles</div>
+            <ul>
+              <li>Obtenir un visa J-1</li>
+              <li>Trouver un job aux USA</li>
+              <li>Sécuriser un logement</li>
+              <li>Ouvrir un compte bancaire</li>
+              <li>Comprendre les démarches</li>
+            </ul>
+          </div>
+          <div class="tache-sub" style="background:var(--purple-light)">
+            <div class="tache-sub-label" style="color:var(--purple)">Sociales</div>
+            <ul>
+              <li>Se différencier sur LinkedIn</li>
+              <li>Rassurer ses parents</li>
+              <li>Montrer qu'il ose</li>
+              <li>Être perçu comme ambitieux</li>
+              <li>Prouver que ce n'est pas une fuite</li>
+            </ul>
+          </div>
+          <div class="tache-sub" style="background:#FFF8EE">
+            <div class="tache-sub-label" style="color:var(--amber)">Personnelles</div>
+            <ul>
+              <li>Parler anglais couramment</li>
+              <li>Gagner en autonomie</li>
+              <li>Tester ses limites</li>
+              <li>Trouver sa voie</li>
+              <li>Sortir de sa zone de confort</li>
+            </ul>
+          </div>
+          <div class="tache-sub" style="background:var(--teal-light)">
+            <div class="tache-sub-label" style="color:var(--teal)">Émotionnelles</div>
+            <ul>
+              <li>Se sentir capable de partir</li>
+              <li>Être rassuré</li>
+              <li>Ne pas se sentir seul</li>
+              <li>Maîtriser son projet</li>
+              <li>Se sentir légitime</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOULEURS -->
+    <div class="profil-card">
+      <div class="profil-card-header" style="background:#FEF0EC; border-bottom:1px solid var(--border)">
+        <div class="profil-card-icon" style="background:var(--coral-light); color:var(--coral)">😟</div>
+        <div>
+          <h3 style="color:var(--coral)">Douleurs (Pains)</h3>
+          <div style="font-size:11px;color:var(--text-muted)">Classées par intensité</div>
+        </div>
+      </div>
+      <div class="profil-card-body" style="padding-top:14px">
+
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--coral);text-transform:uppercase;margin-bottom:8px">●●● Critiques</div>
+
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active"></div>
+            <div class="pain-dot active"></div>
+            <div class="pain-dot active"></div>
+          </div>
+          <div>
+            <div class="pain-label">Peur de se planter — décevoir ses parents, perdre du temps et de l'argent, revenir en échec</div>
+            <span class="pain-type" style="background:var(--coral-light);color:var(--coral)">Psychologique</span>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active"></div>
+            <div class="pain-dot active"></div>
+            <div class="pain-dot active"></div>
+          </div>
+          <div>
+            <div class="pain-label">Surcharge informationnelle : TikTok, forums contradictoires, blogs datés de 2022</div>
+            <span class="pain-type" style="background:var(--coral-light);color:var(--coral)">Indésirable</span>
+          </div>
+        </div>
+
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase;margin:12px 0 8px">●● Fortes</div>
+
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active" style="background:var(--amber)"></div>
+            <div class="pain-dot active" style="background:var(--amber)"></div>
+            <div class="pain-dot inactive"></div>
+          </div>
+          <div>
+            <div class="pain-label">Peur du refus de visa, des arnaques logement, d'être exploité par un employeur</div>
+            <span class="pain-type" style="background:var(--amber-light);color:var(--amber)">Risque</span>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active" style="background:var(--amber)"></div>
+            <div class="pain-dot active" style="background:var(--amber)"></div>
+            <div class="pain-dot inactive"></div>
+          </div>
+          <div>
+            <div class="pain-label">Anglais pas encore fluide, aucun réseau, manque de crédibilité face aux recruteurs US</div>
+            <span class="pain-type" style="background:var(--amber-light);color:var(--amber)">Obstacle</span>
+          </div>
+        </div>
+
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin:12px 0 8px">● Modérées</div>
+
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active" style="background:#AAA"></div>
+            <div class="pain-dot inactive"></div>
+            <div class="pain-dot inactive"></div>
+          </div>
+          <div>
+            <div class="pain-label">Peur du "trou" dans le CV — image perçue comme une fuite aux yeux des recruteurs</div>
+            <span class="pain-type" style="background:var(--gray);color:var(--text-muted)">Indésirable</span>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-dots">
+            <div class="pain-dot active" style="background:#AAA"></div>
+            <div class="pain-dot inactive"></div>
+            <div class="pain-dot inactive"></div>
+          </div>
+          <div>
+            <div class="pain-label">Budget insuffisant au départ, délais visa incertains, complexité administrative</div>
+            <span class="pain-type" style="background:var(--gray);color:var(--text-muted)">Obstacle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAINS -->
+    <div class="profil-card">
+      <div class="profil-card-header" style="background:#EAF6F2; border-bottom:1px solid var(--border)">
+        <div class="profil-card-icon" style="background:var(--teal-light); color:var(--teal)">😊</div>
+        <div>
+          <h3 style="color:var(--teal)">Gains attendus</h3>
+          <div style="font-size:11px;color:var(--text-muted)">Du minimum vital au rêve</div>
+        </div>
+      </div>
+      <div class="profil-card-body" style="padding-top:18px">
+
+        <div class="gain-level">
+          <div class="gain-level-label" style="color:var(--teal)">Requis (indispensables)</div>
+          <div class="gain-chips">
+            <span class="gain-chip" style="background:var(--teal-light);color:var(--teal);border-color:var(--teal)">Visa validé</span>
+            <span class="gain-chip" style="background:var(--teal-light);color:var(--teal);border-color:var(--teal)">Job trouvé</span>
+            <span class="gain-chip" style="background:var(--teal-light);color:var(--teal);border-color:var(--teal)">Logement sécurisé</span>
+            <span class="gain-chip" style="background:var(--teal-light);color:var(--teal);border-color:var(--teal)">Aucune arnaque</span>
+            <span class="gain-chip" style="background:var(--teal-light);color:var(--teal);border-color:var(--teal)">Budget maîtrisé</span>
+          </div>
+        </div>
+
+        <div class="gain-level">
+          <div class="gain-level-label" style="color:var(--blue)">Attendus (normaux)</div>
+          <div class="gain-chips">
+            <span class="gain-chip" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">2–3 entretiens avant départ</span>
+            <span class="gain-chip" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">CV adapté marché US</span>
+            <span class="gain-chip" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">Checklist claire</span>
+            <span class="gain-chip" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">Timeline rassurante</span>
+            <span class="gain-chip" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">Un interlocuteur dédié</span>
+          </div>
+        </div>
+
+        <div class="gain-level">
+          <div class="gain-level-label" style="color:var(--purple)">Souhaités (désirables)</div>
+          <div class="gain-chips">
+            <span class="gain-chip" style="background:var(--purple-light);color:var(--purple);border-color:var(--purple)">Parler anglais sans réfléchir</span>
+            <span class="gain-chip" style="background:var(--purple-light);color:var(--purple);border-color:var(--purple)">Réseau sur place</span>
+            <span class="gain-chip" style="background:var(--purple-light);color:var(--purple);border-color:var(--purple)">Gagner de l'argent vite</span>
+            <span class="gain-chip" style="background:var(--purple-light);color:var(--purple);border-color:var(--purple)">Certification d'expérience</span>
+          </div>
+        </div>
+
+        <div class="gain-level">
+          <div class="gain-level-label" style="color:var(--amber)">Rêve (inattendus)</div>
+          <div class="gain-chips">
+            <span class="gain-chip" style="background:var(--amber-light);color:var(--amber);border-color:var(--amber)">Revenir transformé</span>
+            <span class="gain-chip" style="background:var(--amber-light);color:var(--amber);border-color:var(--amber)">Valeur unique sur le CV</span>
+            <span class="gain-chip" style="background:var(--amber-light);color:var(--amber);border-color:var(--amber)">« Je l'ai fait »</span>
+            <span class="gain-chip" style="background:var(--amber-light);color:var(--amber);border-color:var(--amber)">Devenir une meilleure version de moi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fin profil-grid -->
+
+  <!-- INSIGHT BAR -->
+  <div class="insight-bar">
+    <div class="insight-item">
+      <div class="insight-label">Ce qu'il dit</div>
+      <div class="insight-text">« Je veux partir à l'étranger aux USA. »</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-label">Ce qu'il ressent</div>
+      <div class="insight-text">« J'ai peur de mal faire et de me retrouver seul. »</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-label">Ce qu'il cherche réellement</div>
+      <div class="insight-text">« Une structure qui transforme l'incertitude en plan concret. »</div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════
+     PARTIE 2 — VALUE PROPOSITION
+════════════════════════════════════ -->
+<section id="valeur" class="section-bg-alt">
+  <div class="section-title">Partie 2</div>
+  <div class="section-heading">La Proposition de Valeur</div>
+
+  <div class="vp-wrapper">
+
+    <!-- CARRÉ GAUCHE -->
+    <div class="vp-square">
+      <div class="vp-square-title">Value Proposition</div>
+      <div class="vp-three">
+
+        <div class="vp-block" style="background:var(--blue-light)">
+          <div class="vp-block-title" style="color:var(--blue)">Produits &amp; Services</div>
+          <ul>
+            <li style="color:var(--navy)">Plateforme de matching intelligente (J-1)</li>
+            <li style="color:var(--navy)">Hub guichet unique (visa, logement, banque, SIM)</li>
+            <li style="color:var(--navy)">Coaching administratif &amp; entretien</li>
+            <li style="color:var(--navy)">Communauté alumni + mentorat</li>
+          </ul>
+        </div>
+
+        <div class="vp-block" style="background:#EAF6F2">
+          <div class="vp-block-title" style="color:var(--teal)">Créateurs de gains</div>
+          <ul>
+            <li style="color:var(--navy)">2–3 entretiens confirmés avant le départ</li>
+            <li style="color:var(--navy)">CV adapté au marché américain</li>
+            <li style="color:var(--navy)">Certification de l'expérience (LinkedIn mobilité)</li>
+            <li style="color:var(--navy)">Réseau d'alumni actifs sur place aux USA</li>
+          </ul>
+        </div>
+
+        <div class="vp-block" style="background:var(--coral-light)">
+          <div class="vp-block-title" style="color:var(--coral)">Réducteurs de douleurs</div>
+          <ul>
+            <li style="color:var(--navy)">Guichet unique : fini les 10 interlocuteurs</li>
+            <li style="color:var(--navy)">Checklist personnalisée + alertes visa</li>
+            <li style="color:var(--navy)">Simulation d'entretien + coaching</li>
+            <li style="color:var(--navy)">Accompagnement de A à Z : visa → arrivée</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FLÈCHE -->
+    <div class="vp-arrow">→</div>
+
+    <!-- CERCLE DROIT -->
+    <div class="vp-square">
+      <div class="vp-square-title" style="color:var(--coral);border-color:var(--coral-light)">Customer Profile</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+
+        <div style="background:var(--teal-light);border-radius:12px;padding:14px 16px">
+          <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">😊 Gains</div>
+          <ul style="list-style:none">
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Visa + job avant le départ</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Logement sécurisé</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Checklist + timeline claire</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Revenir transformé</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">« Je l'ai fait »</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--blue-light);border-radius:12px;padding:14px 16px">
+          <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">📋 Customer Jobs</div>
+          <ul style="list-style:none">
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Obtenir visa J-1</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Trouver job + logement</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Se différencier (CV, LinkedIn)</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Parler anglais couramment</li>
+            <li style="font-size:12px;padding:3px 0;color:var(--navy)">Gagner en autonomie</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--coral-light);border-radius:12px;padding:14px 16px;grid-column:1/-1">
+          <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--coral);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">😟 Pains</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+            <div style="font-size:12px;color:var(--navy)">● Peur de se planter</div>
+            <div style="font-size:12px;color:var(--navy)">● Surcharge info (forums)</div>
+            <div style="font-size:12px;color:var(--navy)">● Refus visa / arnaque</div>
+            <div style="font-size:12px;color:var(--navy)">● Pas de réseau US</div>
+            <div style="font-size:12px;color:var(--navy)">● Anglais insuffisant</div>
+            <div style="font-size:12px;color:var(--navy)">● "Trou" dans le CV</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- fin vp-wrapper -->
+
+  <!-- FIT MESSAGE -->
+  <div style="margin-top:24px;background:var(--navy);color:white;border-radius:14px;padding:22px 32px;display:flex;align-items:center;gap:20px">
+    <div style="font-size:28px">🎯</div>
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue-mid);text-transform:uppercase;margin-bottom:4px">Problem–Solution Fit</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.85)">Chaque élément de notre offre répond à un Pain ou un Gain identifié. Le vrai problème résolu n'est pas "trouver un job" — c'est <strong style="color:white">transformer l'incertitude en plan concret et donner la confiance de partir.</strong></div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════
+     PARTIE 3 — LEAN CANVAS
+════════════════════════════════════ -->
+<section id="canvas">
+  <div class="section-title">Partie 3</div>
+  <div class="section-heading">Le Lean Canvas — 9 blocs</div>
+
+  <div class="lc-wrapper">
+    <!-- LIGNE HAUTE -->
+    <div class="lc-row lc-row-top">
+
+      <!-- PROBLÈME -->
+      <div class="lc-cell lc-probleme" style="grid-row:span 2">
+        <div class="lc-cell-title">🔴 Problème</div>
+        <ul class="lc-items">
+          <li>Tout est dispersé : forums, TikTok, blogs contradictoires — surcharge informationnelle massive</li>
+          <li>Peur du visa refusé, des arnaques logement et de l'exploitation par un employeur</li>
+          <li>Pas de matching emploi adapté aux visas temporaires J-1</li>
+          <li>Sentiment d'être seul face à une montagne administrative inconnue</li>
+        </ul>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+          <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--coral);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Alternatives existantes</div>
+          <ul class="lc-items">
+            <li>Forums PVTistes (gratuit, pas structuré)</li>
+            <li>EF Education First (cher, pas orienté job)</li>
+            <li>LinkedIn / Indeed (pas adapté J-1)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SOLUTION -->
+      <div class="lc-cell lc-solution">
+        <div class="lc-cell-title">🟢 Solution</div>
+        <ul class="lc-items">
+          <li>Plateforme de matching IA (profil talent ↔ employeur USA)</li>
+          <li>Hub guichet unique : visa, logement, banque, assurance, SIM</li>
+          <li>Coaching A→Z + simulation entretien</li>
+        </ul>
+      </div>
+
+      <!-- PROPOSITION DE VALEUR — grande colonne centrale -->
+      <div class="lc-cell lc-valeur" style="grid-row:span 2">
+        <div class="lc-cell-title">💙 Proposition de valeur</div>
+        <div class="lc-valeur-content">
+          <div class="lc-valeur-tagline">Le Compagnon<br>d'Expatriation</div>
+          <div class="lc-valeur-sub">« Pars prêt. Reviens transformé. »</div>
+          <div class="lc-valeur-pills">
+            <span class="lc-valeur-pill">Clarté</span>
+            <span class="lc-valeur-pill">Confiance</span>
+            <span class="lc-valeur-pill">Gain de temps</span>
+            <span class="lc-valeur-pill">Légitimité pro</span>
+            <span class="lc-valeur-pill">Matching garanti</span>
+            <span class="lc-valeur-pill">Accompagnement A→Z</span>
+          </div>
+          <div style="margin-top:16px;padding:12px;background:white;border-radius:10px;border:1px solid var(--blue-light)">
+            <div style="font-size:11px;color:var(--blue);line-height:1.6">
+              2–3 entretiens confirmés<br>
+              <strong>avant</strong> l'arrivée aux USA —<br>
+              la promesse qui change tout.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVANTAGE COMPÉTITIF -->
+      <div class="lc-cell lc-avantage">
+        <div class="lc-cell-title">🟣 Avantage compétitif</div>
+        <ul class="lc-items">
+          <li>Spécialisation USA : expertise J-1, Internship, Trainee, H-2B</li>
+          <li>Matching garanti avant le départ</li>
+          <li>Communauté alumni active</li>
+        </ul>
+      </div>
+
+      <!-- SEGMENTS -->
+      <div class="lc-cell lc-segments" style="grid-row:span 2">
+        <div class="lc-cell-title">🟠 Segments clients</div>
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;margin-bottom:6px">B2C — Talents</div>
+        <ul class="lc-items">
+          <li>Étudiants 18–25 ans (J-1 Work & Travel)</li>
+          <li>Jeunes diplômés 22–28 ans (J-1 Internship / Trainee)</li>
+          <li>Jeunes en reconversion 25–30 ans</li>
+        </ul>
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;margin:12px 0 6px">B2B — Recruteurs</div>
+        <ul class="lc-items">
+          <li>Entreprises US cherchant talents francophones</li>
+          <li>Hôtels, resorts, startups, agences</li>
+          <li>Écoles de langue partenaires</li>
+        </ul>
+        <div style="margin-top:12px;padding:8px 10px;background:var(--amber-light);border-radius:8px">
+          <div style="font-size:11px;color:var(--amber);font-weight:500">Early adopters : étudiants grandes écoles (BDE partenaires) + jeunes diplômés cherchant 1ère expérience internationale</div>
+        </div>
+      </div>
+
+    </div><!-- fin ligne haute row 1 -->
+
+    <!-- LIGNE INTERMÉDIAIRE (Solution bas + Avantage bas) -->
+    <div class="lc-row" style="grid-template-columns:1.1fr 1fr 1fr 1.1fr; margin-top:3px">
+
+      <!-- Indicateurs clés (sous Solution) -->
+      <div style="display:none"></div><!-- Spacer colonne 1 géré par span -->
+      <div class="lc-cell lc-indicateurs" style="grid-column:2">
+        <div class="lc-cell-title">📊 Indicateurs clés</div>
+        <ul class="lc-items">
+          <li>Inscriptions / mois</li>
+          <li>Taux d'entretiens obtenus</li>
+          <li>Contrats signés</li>
+          <li>NPS satisfaction</li>
+          <li>Nb partenaires actifs</li>
+        </ul>
+      </div>
+
+      <!-- Canaux (sous Avantage) -->
+      <div class="lc-cell lc-canaux" style="grid-column:3">
+        <div class="lc-cell-title">📣 Canaux</div>
+        <ul class="lc-items">
+          <li>TikTok / Instagram (témoignages alumni)</li>
+          <li>YouTube (guides visa J-1)</li>
+          <li>SEO + blog (« travailler aux USA »)</li>
+          <li>Webinars d'information</li>
+          <li>Partenariats BDE / écoles de commerce</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- LIGNE BAS : Coûts + Revenus -->
+    <div class="lc-row lc-row-bottom" style="margin-top:3px">
+
+      <div class="lc-cell lc-couts">
+        <div class="lc-cell-title">💸 Structure de coûts</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Fixes</div>
+            <ul class="lc-items">
+              <li>Développement plateforme MVP : 15 000–30 000 €</li>
+              <li>Équipe : expert visa J-1 + content manager</li>
+              <li>Hébergement + maintenance tech</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">Variables</div>
+            <ul class="lc-items">
+              <li>Marketing acquisition : ~5 000 €/mois</li>
+              <li>Coaching &amp; support visa (selon volume)</li>
+              <li>Partenariats : assurances, banques, logement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="lc-cell lc-revenus">
+        <div class="lc-cell-title">💰 Sources de revenus</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;margin-bottom:6px">B2C</div>
+            <ul class="lc-items">
+              <li>Abonnement Premium : 15 €/mois</li>
+              <li>Pack Early Bird : 150–300 €</li>
+              <li>Pack Premium : 900–1 800 €</li>
+              <li>Coaching one-shot : 199 €/session</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;margin-bottom:6px">B2B</div>
+            <ul class="lc-items">
+              <li>Commission recrutement : 5–10% salaire</li>
+              <li>Accès base talents RH : abonnement annuel</li>
+              <li>Partenariats écoles de langue : 10–25%</li>
+              <li>Apporteurs d'affaires (assurance, banque)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- fin lc-wrapper -->
+
+</section>
+
+<footer>
+  GloVia USA — Parcours Création d'Entreprise ECS MediaSchool 2026
+</footer>
+
+<script>
+  // Navigation active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>
